@@ -30,7 +30,9 @@ Pour le GSM : une arrete représente une adjacence entre deux antennes
 
 ### les ́eventuelles informations complémentaires que vous jugerez nécessaires à ajouter au graphe
 
+Pour le cas du Sudoku :
 
+Le Sudoku étant connu, on sait que au moins 17 sommets sont à donner, mais ce n'est pas parce qu'il y a 17 sommets donnés, que le Sudoku peut être résolu
 ### vous expliquerez ce qu'on cherche à réaliser dans le graphe, et en quoi cela permet de répondre au problème de l'application
 
 La question qui se pose du point de vue d'un sommet est : ai-je un voisin comme moi ? 
@@ -40,9 +42,6 @@ Par voisin on veut dire sommet compris dans le voisinage d'un sommet
 Dans le graphe on cherche à faire un sorte que chacun des sommets n'a aucun voisin comme lui même
 
 
-Car si chaque voisin de tel sommet est différent de ce tel sommet, alors le graphe est résolu, c'est à dire que tous les sommets ont une valeur attribuée qui correspond aux objectifs de l'application.
+Car si pour chaque sommet x du graphe, chaque sommet y adjacent à ce sommet x a une couleur différente de ce sommet x, notre objectif est atteint (par exemple le sudoku est résolu, maintenant il reste à voir si 81 couleurs ont été utilisé ou bien 9)
 
 
-Pour le cas du Sudoku, bien que ce soit envisageable, à notre stade pour les autres cas aussi :
-
-Le Sudoku étant connu, on sait que au moins 17 sommets sont à donner, mais ce n'est pas parce qu'il y a 17 sommets donnés, que le Sudoku peut être résolu
