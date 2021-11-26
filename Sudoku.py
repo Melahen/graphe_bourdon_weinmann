@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 
 #On fait un graphe avec 81 sommets et zéros arrêtes
 Sudoku = nx.empty_graph(81)
+for node in Sudoku.nodes :
+    nx.set_node_attributes(Sudoku, 0 , "color")
 # On va connecter les sommets de même ligne
 for ligne in range(0, 9) :
     # deb = 9 -> premier sommet de la deuxième ligne, deb = 8 étant le dernier sommet de la première ligne
@@ -29,8 +31,12 @@ for saut_colonne in range(3) :
                     u = deplacement + (i % 3) + 9 * (i // 3)
                     v = deplacement + (j % 3) + 9 * (j // 3)
                     Sudoku.add_edge(u, v)
+                    
 
+possibilities = [n for n in range(1,10)]
+for node in Sudoku.nodes :
+        Sudoku.nodes[node]["color"] 
             
-            
-nx.draw(Sudoku, with_labels=True, font_weight='bold')
+couleur = nx.get_node_attributes(Sudoku, "color")
+nx.draw(Sudoku, labels = couleur)
 plt.show()
