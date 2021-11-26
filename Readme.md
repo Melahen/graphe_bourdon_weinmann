@@ -45,5 +45,4 @@ Car si chaque voisin de tel sommet est différent de ce tel sommet, alors le gra
 
 Pour le cas du Sudoku, bien que ce soit envisageable, à notre stade pour les autres cas aussi :
 
-
 Le Sudoku étant connu, on sait que au moins 17 sommets sont à donner, mais ce n'est pas parce qu'il y a 17 sommets donnés, que le Sudoku peut être résolu
