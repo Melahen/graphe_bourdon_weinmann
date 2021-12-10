@@ -45,3 +45,5 @@ Dans le graphe on cherche à faire un sorte que chacun des sommets n'a aucun voi
 Car si pour chaque sommet x du graphe, chaque sommet y adjacent à ce sommet x a une couleur différente de ce sommet x, notre objectif est atteint (par exemple le sudoku est résolu, maintenant il reste à voir si 81 couleurs ont été utilisé ou bien 9)
 
 
+### Algorithme
+Vous trouverez ce qui concerne l'algorithme dans algorithme.txt
