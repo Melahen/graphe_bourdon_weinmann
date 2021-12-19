@@ -1,42 +1,38 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-
-#On fait un graphe avec 81 sommets et zéros arrêtes
-Sudoku = nx.empty_graph(81)
-for node in Sudoku.nodes :
-    nx.set_node_attributes(Sudoku, 0 , "color")
-# On va connecter les sommets de même ligne
-for ligne in range(0, 9) :
-    # deb = 9 -> premier sommet de la deuxième ligne, deb = 8 étant le dernier sommet de la première ligne
-    # On fait un sous graphe complet pour chaque ligne
-    premier_sommet_ligne = ligne * 9
-    for i in range(1, 9) :
-        for j in range(i) :
-            Sudoku.add_edge(premier_sommet_ligne + i, premier_sommet_ligne + j)
+import sys
 
 
-# On connecte maintenant les sommets de même colonne
-for colonne in range(0, 9) :
-    for i in range(1, 9) :
-        for j in range(i) :
-            Sudoku.add_edge(i * 9 + colonne, j * 9 + colonne)
+def Sudoku_full_zero() :
+    un_Sudoku = nx.sudoku_graph()
+    for node in nx.nodes(un_Sudoku) :
+        un_Sudoku.nodes[node]["Color"] = 0
+    return un_Sudoku
 
-# Les cases de sudoku sont aussi reliées en bloc de 9, il y a 9 blocs dans un jeu de sudoku
-# Vous observerez la beauté de la présence de 9/3, 9 et 9*3 dans ce morceau de code
-for saut_colonne in range(3) :
-        for saut_ligne in range(3) :
-            deplacement = 27 * saut_colonne+ 3 * saut_ligne
-            for i in range(1,  9) :
-                for j in range(i) :
-                    u = deplacement + (i % 3) + 9 * (i // 3)
-                    v = deplacement + (j % 3) + 9 * (j // 3)
-                    Sudoku.add_edge(u, v)
-                    
+def apply_input(un_Sudoku) :
+    toutes_les_lignes = []
+    with open("input_Sudoku/Sudoku_simple.txt", "r") as input :
+        for ligne in input.readlines() :
+            toutes_les_lignes.append(ligne.strip())
+    for commande in toutes_les_lignes :
+        abscisse = int(commande[0])
+        ordonnee = int(commande[2])
+        valeur = int(commande [4])
+        un_Sudoku.nodes[(9 * (ordonnee - 1)) + abscisse - 1]["Color"] = valeur
+    
 
-possibilities = [n for n in range(1,10)]
-for node in Sudoku.nodes :
-        Sudoku.nodes[node]["color"] 
-            
-couleur = nx.get_node_attributes(Sudoku, "color")
-nx.draw(Sudoku, labels = couleur)
-plt.show()
+
+
+
+
+
+
+if __name__ == "__main__":
+    Sudoku = Sudoku_full_zero()
+    apply_input(Sudoku)
+    
+
+
+    couleur = nx.get_node_attributes(Sudoku, "Color")
+    nx.draw(Sudoku, labels = couleur)
+    plt.show()
