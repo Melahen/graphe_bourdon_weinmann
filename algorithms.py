@@ -1,7 +1,8 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+from numpy import number
 
-
+"""
 G = nx.Graph()
 
 
@@ -12,9 +13,9 @@ G = nx.Graph()
 # On donne à chaque sommet une "couleur" différente
 # Ainsi on s'assure qu'aucun sommet n'a la même couleur
 couleur = 0
-for sommet in G.neighbors() :
+for sommet in G.nodes() :
     sommet["color"] = couleur
-    couleur += 1
+    couleur += 1"""
     
 # Ce genre de solution n'est pas réaliste, on ne va pas remplir le Sudoku avec 81 numéros
 
@@ -36,25 +37,43 @@ retourner la liste des couleurs de g'''
 
 
 def glouton(graphe) :
-    all_couleurs = []
-    color_count = 0
+    dico = {}
     for sommet in graphe.nodes() :
-        all_couleurs.append(color_count)
-        color_count += 1
-    
-    
-    for sommet in graphe.nodes() :
-        couleurs_presentes = []
-        for color in sommet.neighbors() :
-            couleurs_presentes.append(color)
-        for used in couleurs_presentes :
-            all_couleurs.remove(used)
-        couleur_pour_le_sommet = all_couleurs[0]
-        sommet['color'] = couleur_pour_le_sommet
-        for used in couleurs_presentes :
-            all_couleurs.append(used)
-        all_couleurs = sorted(all_couleurs)
+        dico[sommet] = graphe.degree[sommet]
+    liste_sommet_par_degree_decreasing = sorted(dico.keys(), key = dico.get, reverse = True)
+
+    liste_sommets_colorees = []
+    couleur_actuelle = 1
+    sommet_actuel = 0
+
+    while len(liste_sommets_colorees) < graphe.number_of_nodes() :
+        voisins_colored = False
+
+        for voisin in nx.neighbors(graphe, liste_sommet_par_degree_decreasing[sommet_actuel]) :
+            if graphe.nodes[voisin]["Color"] == couleur_actuelle :
+                voisins_colored = True
+                break
         
+        if not voisins_colored :
+            graphe.nodes[liste_sommet_par_degree_decreasing[sommet_actuel]]["Color"] = couleur_actuelle
+            liste_sommets_colorees.append(liste_sommet_par_degree_decreasing[sommet_actuel])
+
+
+        sommet_actuel += 1
+        
+        if sommet_actuel == len(liste_sommet_par_degree_decreasing) :
+            sommet_actuel = 0
+            couleur_actuelle += 1
+            for sommet_colored in liste_sommets_colorees :
+                if sommet_colored in liste_sommet_par_degree_decreasing :
+                    liste_sommet_par_degree_decreasing.remove(sommet_colored)
+
+
+
+
+
+
+
 # on peut modifier glouton pour qu'il prenne en fonction de la liste decroissante des degre
         
             
