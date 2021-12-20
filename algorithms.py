@@ -58,4 +58,3 @@ def glouton(graphe) :
 # on peut modifier glouton pour qu'il prenne en fonction de la liste decroissante des degre
         
             
-            
