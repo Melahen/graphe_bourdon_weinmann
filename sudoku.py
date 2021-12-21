@@ -2,7 +2,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import sys
 import algorithms
-import copy
 
 def Sudoku_full_zero() :
     un_Sudoku = nx.sudoku_graph()
