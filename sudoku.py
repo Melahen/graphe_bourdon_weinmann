@@ -18,24 +18,15 @@ def apply_input(un_Sudoku, un_input) :
         abscisse = int(commande[0])
         ordonnee = int(commande[2])
         valeur = int(commande [4])
-        un_Sudoku.nodes[(9 * (ordonnee - 1)) + abscisse - 1]["Color"] = valeur
+        un_Sudoku.nodes[(9 * (ordonnee - 1)) + (abscisse - 1)]["Color"] = valeur
     
 
 
 
 
-
+"""
 def solveur_naif(g) :
-    """
-        On regarde le premier noeud sans couleur, et on lui attribue la premiere des couleurs disponibles.
-        Si en partant de cette premiere attribution on tombe sur un noeud auquel on ne peut pas attribuer de couleurs
-        alors on attribue la seconde couleur disponible au premier noeud et ainsi de suite jusqu'à ne plus avoir de
-        noeud sans couleur
 
-        Si pour le premier noeud, on rencontre pour chacune de ses couleurs disponibles un noeud sans couleur attribuable,
-        on ne peut pas resoudre le sudoku
-    
-    """
     liste_tous_sommets = [sommet for sommet in g.nodes()]
     dico_chaque_sommet = {}
     for sommet in liste_tous_sommets :
@@ -68,7 +59,7 @@ def solveur_naif(g) :
 
             g.nodes[les_valeurs_rangees[0][0]]["Color"] = list(les_valeurs_rangees[0][1])[0]
 
-
+"""
     
 
 def is_possible(graphe, sommet, couleur_a_verifier) :
@@ -77,19 +68,61 @@ def is_possible(graphe, sommet, couleur_a_verifier) :
             return False
     return True
 
+def solveSudokHelper(graphe, sommet) :
+    
+    if (sommet + 1) == len(graphe) :
+        if graphe.nodes[sommet]["Color"] != 0 :
+            print()
+            for node in graphe.nodes :
+                print(graphe.nodes[node]["Color"], end=" ")
+        else :
+            for pigment in range(1, 10) :
+                if is_possible(graphe, sommet, pigment) :
+                    graphe.nodes[sommet]["Color"] = pigment
+                    print()
+                    for node in graphe.nodes :
+                        print(graphe.nodes[node]["Color"], end=" ")
+                    graphe.nodes[sommet]["Color"] = 0
+        print()
+        return
+    
+    if sommet > 80 :
+        solveSudokHelper(graphe, (sommet % 9) + 1)  
+        return
+
+    if graphe.nodes[sommet]["Color"] == 0 :
+        for pigment in range(1, 10) :
+            if is_possible(graphe, sommet, pigment) :
+                graphe.nodes[sommet]["Color"] = pigment
+                solveSudokHelper(graphe, sommet + 9)
+                graphe.nodes[sommet]["Color"] = 0
+    
+    else :
+        solveSudokHelper(graphe, sommet + 9)
+    
+    return
+
+
+def solveSudoku(graphe, sommet) :
+    solveSudokHelper(graphe, 0)
 
 
 
-
-
-
+def sudokuChecker(graphe) :
+    for sommet in graphe.nodes :
+        for voisin in nx.neighbors(graphe, sommet) :
+            if graphe.nodes[voisin]["Color"] == graphe.nodes[sommet]["Color"] :
+                return False
+    return True
 
 
 if __name__ == "__main__":
     Sudoku = Sudoku_full_zero()
     apply_input(Sudoku, sys.argv[1])
-    solveur_naif(Sudoku)
+    #solveur_naif(Sudoku)
     #algorithms.glouton(Sudoku)
+    solveSudoku(Sudoku, 0)
+    
     
 
 
