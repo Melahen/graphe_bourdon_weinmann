@@ -2,6 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import sys
 import algorithms
+import copy
 
 def Sudoku_full_zero() :
     un_Sudoku = nx.sudoku_graph()
@@ -84,27 +85,30 @@ def solveSudokHelper(graphe, sommet) :
                         print(graphe.nodes[node]["Color"], end=" ")
                     graphe.nodes[sommet]["Color"] = 0
         print()
-        return
+        
+        return graphe
     
     if sommet > 80 :
-        solveSudokHelper(graphe, (sommet % 9) + 1)  
-        return
+        graphe = solveSudokHelper(graphe, (sommet % 9) + 1)
+        return graphe
 
     if graphe.nodes[sommet]["Color"] == 0 :
         for pigment in range(1, 10) :
             if is_possible(graphe, sommet, pigment) :
                 graphe.nodes[sommet]["Color"] = pigment
-                solveSudokHelper(graphe, sommet + 9)
+                graphe = solveSudokHelper(graphe, sommet + 9)
+                if sudokuChecker(graphe) :
+                    return graphe
                 graphe.nodes[sommet]["Color"] = 0
     
     else :
-        solveSudokHelper(graphe, sommet + 9)
+        graphe = solveSudokHelper(graphe, sommet + 9)
     
-    return
+    return graphe
 
 
 def solveSudoku(graphe, sommet) :
-    solveSudokHelper(graphe, 0)
+    solveSudokHelper(graphe, sommet)
 
 
 
@@ -121,6 +125,7 @@ if __name__ == "__main__":
     apply_input(Sudoku, sys.argv[1])
     #solveur_naif(Sudoku)
     #algorithms.glouton(Sudoku)
+    temoin = 0
     solveSudoku(Sudoku, 0)
     
     
