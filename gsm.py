@@ -2,6 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import sys
 import algorithms
+import time
 
 
 def init_gsm(un_input) :
@@ -21,8 +22,25 @@ def init_gsm(un_input) :
 
 
 if __name__ == "__main__":
-    Antennes = init_gsm(sys.argv[1])
+    Antennes = init_gsm(sys.argv[2])
+
+    start = time.time()
+
     algorithms.glouton(Antennes)
+
+    end = time.time()
+    print("L'algorithme a pris : ", round((end - start), 6), "s")
+
+    fichier = open(sys.argv[4], "w") 
+    fichier.write("")
+    fichier.close()
+    fichier = open(sys.argv[4], "a") 
+
+    les_noeuds = [int(x) for x in Antennes.nodes]
+    les_noeuds.sort()
+    for sommet in les_noeuds :
+        fichier.write(str(sommet) + " " + str(Antennes.nodes[str(sommet)]["Color"]) + "\n" )
+    fichier.close()
 
     couleur = nx.get_node_attributes(Antennes, "Color")
     nx.draw(Antennes, with_labels=True, font_size = 11, labels = couleur)

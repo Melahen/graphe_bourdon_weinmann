@@ -2,6 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import sys
 import algorithms
+import time
 
 
 def init_map(un_input) :
@@ -23,8 +24,22 @@ def init_map(un_input) :
 
 
 if __name__ == "__main__":
-    Carte = init_map(sys.argv[1])
+    Carte = init_map(sys.argv[2])
+
+    start = time.time()
+
     algorithms.glouton(Carte)
+
+    end = time.time()
+    print("L'algorithme a pris : ", round((end - start), 6), "s")
+
+    fichier = open(sys.argv[4], "w") 
+    fichier.write("")
+    fichier.close()
+    fichier = open(sys.argv[4], "a") 
+    for sommet in Carte.nodes() :
+        fichier.write(str(sommet)  + " " + str(Carte.nodes[sommet]["Color"]) + "\n")
+    fichier.close()
 
 
 
