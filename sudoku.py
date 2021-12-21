@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import sys
+import algorithms
 
 def Sudoku_full_zero() :
     un_Sudoku = nx.sudoku_graph()
@@ -65,20 +66,22 @@ def solveur_naif(g) :
                         les_valeurs_rangees.insert(0, couple)
             
 
-            g.nodes[dico_chaque_sommet[les_valeurs_rangees[0][0]]] = list(les_valeurs_rangees[0][1])[0]
-
-
-
-
+            g.nodes[les_valeurs_rangees[0][0]]["Color"] = list(les_valeurs_rangees[0][1])[0]
 
 
     
 
+def is_possible(graphe, sommet, couleur_a_verifier) :
+    for voisin in nx.neighbors(graphe, sommet) :
+        if graphe.nodes[voisin]["Color"] == couleur_a_verifier :
+            return False
+    return True
 
-        
-        
 
-    
+
+
+
+
 
 
 
@@ -86,6 +89,7 @@ if __name__ == "__main__":
     Sudoku = Sudoku_full_zero()
     apply_input(Sudoku, sys.argv[1])
     solveur_naif(Sudoku)
+    #algorithms.glouton(Sudoku)
     
 
 

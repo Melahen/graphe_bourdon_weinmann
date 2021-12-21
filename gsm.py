@@ -1,9 +1,10 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import sys
+import algorithms
 
 
-def init_map(un_input) :
+def init_gsm(un_input) :
     resaux_antennes = nx.Graph()
     with open(un_input, "r") as input :
         les_connexions = []
@@ -13,10 +14,16 @@ def init_map(un_input) :
 
 
     resaux_antennes.add_edges_from(les_connexions)
+    for sommet in resaux_antennes.nodes :
+        resaux_antennes.nodes[sommet]["Color"] = 0
+
     return resaux_antennes
 
 
 if __name__ == "__main__":
-    Antennes = init_map(sys.argv[1])
-    nx.draw(Antennes, with_labels=True, font_size = 11)
+    Antennes = init_gsm(sys.argv[1])
+    algorithms.glouton(Antennes)
+
+    couleur = nx.get_node_attributes(Antennes, "Color")
+    nx.draw(Antennes, with_labels=True, font_size = 11, labels = couleur)
     plt.show()
