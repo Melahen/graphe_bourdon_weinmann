@@ -171,7 +171,7 @@ Cet algorithme va traiter les sommets du graphe dans l'ordre décroissant de leu
 
 ```
 fonction glouton_avancé(graphe) :
-    les_sommets = liste de tous les sommets de graphe (au début)
+    les_sommets = liste de tous les sommets de graphe rangé par ordre décroissant de leur dégré 
     liste_sommets_colorés = liste des sommets ayant une couleur 
     couleur actuelle = 0
     sommet_actuel = 0
