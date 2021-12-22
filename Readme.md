@@ -293,7 +293,8 @@ Pour ce qui est de remplir chaque graphe, notre proposition de glouton avancé e
 Pour une résolution correcte, nos gloutons ne sont bons que pour Gsm et Carte, pour ce qui est de Sudoku, on se sert d'un backtracking, qui est très lent par rapport à eux (de l'ordre de 1000 fois plus lent).
 
 Nous tenons à préciser que les inputs sont restés les mêmes, d'un algorithme à l'autre.
-Vous les trouverez dans le dossier input dans le dépot de ce Readme
+Vous les trouverez dans le dossier input dans le dépot de ce Readme.
+On a noté ici le temps des algorithmes pour Sudoku avec input/sudoku2.txt comme input.
 
 L'input de map et de gsm est disponible en ligne sur Discord, sur le serveur Formations Informatique Lille, dans le groupe s5_graphes.
 Celui de map correspond à peu près à la carte de l'Europe.
