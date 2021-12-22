@@ -290,11 +290,12 @@ On a lancé plusieurs fois nos algorithmes pour prendre un résultat moyen.
 
 Pour ce qui est de remplir chaque graphe, notre proposition de glouton avancé est la meilleur, dans chaque cas, quand il s'agit de temps de résolution.
 
-Pour une résolution correcte, nos gloutons ne sont bons que pour Gsm et Carte, pour ce qui est de Sudoku, on se sert d'un backtracking, qui est très lent.
+Pour une résolution correcte, nos gloutons ne sont bons que pour Gsm et Carte, pour ce qui est de Sudoku, on se sert d'un backtracking, qui est très lent par rapport à eux (de l'ordre de 1000 fois plus lent).
 
 Nous tenons à préciser que les inputs sont restés les mêmes, d'un algorithme à l'autre.
+Vous les trouverez dans le dossier input dans le dépot de ce Readme
 
-L'input de map et de gsm est disponible sur Discord, sur le serveur Formations Informatique Lille, dans le groupe s5_graphes.
+L'input de map et de gsm est disponible en ligne sur Discord, sur le serveur Formations Informatique Lille, dans le groupe s5_graphes.
 Celui de map correspond à peu près à la carte de l'Europe.
 Nous avons pris des sudokus à résoudre pour l'input de sudoku.
 
@@ -355,4 +356,12 @@ Vous pouvez voir nos résultats et interprétation dans la partie Résultat du R
 
 #### trouver une application, différente de celles citées ci-dessous, qui utilise la même modélisation.
 
-Nous pensons à la création d'emploi du temps, un professeur ne peut pas enseigner plusieurs classe en même temps.
+Nous pensons à la création d'emploi du temps pour un examen
+
+Si connait quelques cours qui n'ont aucun étudiant en commun :
+
+Les sommets représentent les cours
+
+Les arretes représentent le fait que 2 cours ont un étudiant en commun
+
+On peut essayer de répondre à la question, combien faut il de créneau pour planifier l'examen.
