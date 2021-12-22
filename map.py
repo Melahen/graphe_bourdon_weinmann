@@ -36,13 +36,20 @@ if __name__ == "__main__":
     fichier = open(sys.argv[4], "w") 
     fichier.write("")
     fichier.close()
+    
+    if algorithms.sudokuChecker(Carte) :
+        print("\nCette phrase est la preuve que l'algorithme a terminé et résolu le graphe,\n elle est affichée suite à un appel de la fonction\n de vérification en cas de succès.\n Voir partie Verification du Readme\n\n")
+    else :
+        print("\nCette phrase est la preuve que l'algorithme a échoué\n voir partie Verification du Readme\n\n")
+
+    for sommet in Carte.nodes :
+        Carte.nodes[sommet]["Color"] = Carte.nodes[sommet]["Color"] - 1
+
     fichier = open(sys.argv[4], "a") 
     for sommet in Carte.nodes() :
         fichier.write(str(sommet)  + " " + str(Carte.nodes[sommet]["Color"]) + "\n")
     fichier.close()
-
-
-
+    
     couleur = nx.get_node_attributes(Carte, "Color")
     nx.draw(Carte, with_labels=True, font_size = 8, labels = couleur)
     plt.show()

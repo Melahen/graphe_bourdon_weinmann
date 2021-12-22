@@ -3,11 +3,15 @@ Kévin Bourdon et Maximilien Weinmann
 # Execution du code et visualisation de la coloration des graphes
 
 ###### Pour Sudoku, vous pouvez taper dans le terminal :
-python3 sudoku.py -i input/Sudoku_simple.txt -o output_sudoku.txt
+python3 sudoku.py -i input/sudoku_simple.txt -o output_sudoku.txt
 
 ou bien 
 
 python3 sudoku.py -i input/sudoku2.txt -o output_sudoku.txt
+
+ou bien, pour tester le comportement en cas de sudoku irréalisable :
+
+python3 sudoku.py -i input/sudoku_impossible.txt -o output_sudoku.txt
 
 
 ###### Pour la carte géographique, vous pouvez taper dans le terminal :
@@ -17,6 +21,9 @@ python3 map.py -i input/input_map.txt -o output_map.txt
 ###### Pour le réseaux GSM, vous pouvez taper dans le terminal :
 python3 gsm.py -i input/input_gsm.txt -o output_gsm.txt
 
+###### Output
+
+Vous trouverez le résultat des résolutions sous forme textuelle dans les fichiers output_gsm.txt, output_map.txt et output_sudoku.txt
 
 ## Modélisation (Partie du 1er rendu)
 
@@ -188,6 +195,8 @@ Il terminera rapidement, mais ne trouvera pas toujours le nombre minimum de coul
 
 Un algorithme de backtracking sera plus efficace pour sudoku, où 9 couleurs sont imposées.
 
+On appelé solveSudokuHelper() notre algorithme de backtracking dans algorithm.py
+
 Pseudocode pour backtracking :
 ```
 def backtracking(graphe, sommet) :
@@ -200,7 +209,7 @@ def backtracking(graphe, sommet) :
         backtracking(graphe, sommet%9 +1) # pour atteindre la colonne d'a coté
     
     si sommet n'est pas coloré :
-        donner couleur a sommet 
+        donner couleur possible à sommet 
         backtracking(graphe, sommet + 9) # pour atteindre la ligne d'en dessous
         si le graphe est valide :
             return graphe
@@ -211,9 +220,15 @@ def backtracking(graphe, sommet) :
     return graphe
 ```
 
-Ici couleur possible s'assurera que le sudoku n'a pas deux voisins de meme couleur.
+Ici donner une couleur possible signifie boucler sur les couleurs et donner au sommet une couleur qui ne déroge pas
+aux regles du sudoku.
 
 Le graphe est valide si le sudoku est rempli sans voisin de même couleur.
+
+
+Dans algorithms.py, nous avons ajouté à notre backtracking une condition qui vérifie que le Sudoku est résoluble,
+afin d'éviter qu'il tourne en boucle dans le cas d'un Sudoku sans résolution.
+
 
 Cet algorithme est plus lent car brute-force, néanmoins, en cas de soucis il reviendra en arrière et prendra un autre chemin, d'où son nom.
 
@@ -223,7 +238,9 @@ Aussi, si on ne l'arretait pas au premier sudoku résolu, cet algorithme est cap
 
 Source pour l'algorithme glouton :
 https://www.codeproject.com/Articles/801268/A-Sudoku-Solver-using-Graph-Coloring
+
 ( la partie :
+
 
 1. Select the vertex of maximum degree V.
 
@@ -235,15 +252,17 @@ https://www.codeproject.com/Articles/801268/A-Sudoku-Solver-using-Graph-Coloring
 
 5. Remove Y from the set and repeat steps 3-5 until the list is empty.
 
-6 .Remove vertex V from the graph
+6. Remove vertex V from the graph
 
 7. Repeat steps 1-6 until the resulting graph has all contracted nodes adjacent to each other.
+
 )
 
 
 
 Source pour l'algorithme backtracking :
 https://medium.com/swlh/sudoku-solver-using-backtracking-in-python-8b0879eb5c2d
+
 (L'algo proposé par le site n'est pas adapté pour le DM, mais avec quelques modifications on peut arriver à nos fins, comme vous le verrez dans
 algorithms.py)
 
@@ -255,7 +274,7 @@ On a lancé plusieurs fois nos algorithmes pour prendre un résultat moyen.
 
 
 ##### BackTracking :
-- Sudoku : 0.201292 s
+- Sudoku : 2.260145 s (sans vérification constante 0.201292 s, ce qui reste lent)
 
 
 ##### Glouton Avancé :
@@ -275,5 +294,65 @@ Pour une résolution correcte, nos gloutons ne sont bons que pour Gsm et Carte, 
 
 Nous tenons à préciser que les inputs sont restés les mêmes, d'un algorithme à l'autre.
 
-L'input de map et de gsm est disponible sur Discord.
+L'input de map et de gsm est disponible sur Discord, sur le serveur Formations Informatique Lille, dans le groupe s5_graphes.
+Celui de map correspond à peu près à la carte de l'Europe.
 Nous avons pris des sudokus à résoudre pour l'input de sudoku.
+
+
+## Vérification
+
+On considère un graphe terminé lorsque notre algorithme a attribué une couleur à chaque sommet du graphe
+
+Chaque graphe est soumis à au moins une vérification : 
+
+
+Une fonction sudokuChecker(graphe) vérifie que le graphe est composé de sommet sans voisin de même couleur, et qu'il n'y a pas de sommet sans couleur
+
+
+#### Cas du Sudoku :
+En cas de sudoku inrésoluble, un affichage apparait dans la console indiquant qu'on ne peut pas résoudre le sudoku, en tout cas pas avec notre algorithme
+
+En cas de succès, en dehors de l'affichage networkx du graphe et du message de la mesure du temps, il n'y a rien.
+
+#### Cas de GSM et de Carte :
+Dans le cas où glouton ne réussit pas à terminer le graphe, ou s'il le termine en associant la même couleur à 2 sommets adjacents, un message d'echec est affiché
+
+Si le graphe est terminé, sans voisin de même couleur, un message de succès sera affiché
+
+Que ce soit en cas d'échec ou de succès, un message sera affiché, et sera la preuve que sudokuChecker a vérifié le graphe
+
+
+
+## Section Travail à faire du PDF du DM :
+
+Ici nous allons nous vérifier que nous avons fait ce qui est demandé dans la partie travail à faire du DM.
+
+#### identifier le point commun entre ces problèmes et proposer une modélisation sous forme de graphes pour chacun d’entre eux
+
+Nous avons identifié le point commun dans la partie   "vous expliquerez ce qu'on cherche à réaliser dans le graphe, et en quoi cela permet de répondre au problème de l'application"   de la partie Modélisation du Readme
+
+
+On a proposé nos modélisations dans les fichiers map.py, gsm.py et sudoku.py
+
+cette modélisation est expliqué dans la partie Modélisation de notre Readme
+
+#### proposer des algorithmes pour résoudre le problème, en prouver la terminaison et la correction
+
+On peut voir nos propositions dans la partie des propositions et la partie dicuter des limites de la partie Algorithme du Readme
+
+
+On prouve leur terminaison dans la partie Vérification du Readme et la correction dans la partie Algorithme (2ème Rendu) du readme
+
+#### implémenter ces algorithmes, les valider en les exécutant sur des instances des problèmes et en interprétant les solutions obtenues,
+
+Dans les fichiers map.py, gsm.py, sudoku.py et algorithms.py, vous trouverez les algorithmes de résolution du problème
+ainsi que leur mise en oeuvre, vous y verrez nos implémentations. 
+
+Vous trouverez les indications d'éxécutions au début du Readme
+
+Vous pouvez voir nos résultats et interprétation dans la partie Résultat du Readme
+
+
+#### trouver une application, différente de celles citées ci-dessous, qui utilise la même modélisation.
+
+Nous pensons à la création d'emploi du temps, un professeur ne peut pas enseigner plusieurs classe en même temps.

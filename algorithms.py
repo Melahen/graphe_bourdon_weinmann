@@ -76,6 +76,8 @@ def is_possible(graphe, sommet, couleur_a_verifier) :
     return True
 
 def solveSudokuHelper(graphe, sommet) :
+    if not sudokuCheckerPartial(graphe) :
+        return graphe
     
     if (sommet + 1) == len(graphe) :
         if graphe.nodes[sommet]["Color"] == 0 :
@@ -109,12 +111,20 @@ def solveSudokuHelper(graphe, sommet) :
 
 def sudokuChecker(graphe) :
     for sommet in graphe.nodes :
+        if graphe.nodes[sommet]["Color"] == 0 :
+            return False
         for voisin in nx.neighbors(graphe, sommet) :
             if graphe.nodes[voisin]["Color"] == graphe.nodes[sommet]["Color"] :
                 return False
     return True
 
-
+def sudokuCheckerPartial(graphe) :
+    for sommet in graphe.nodes :
+        for voisin in nx.neighbors(graphe, sommet) :
+            if graphe.nodes[sommet]["Color"] != 0 :
+                if graphe.nodes[voisin]["Color"] == graphe.nodes[sommet]["Color"] :
+                    return False
+    return True
 
 
 

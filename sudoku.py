@@ -39,10 +39,17 @@ if __name__ == "__main__":
     fichier = open(sys.argv[4], "w") 
     fichier.write("")
     fichier.close()
-    fichier = open(sys.argv[4], "a") 
-    for sommet in Sudoku.nodes() :
-        fichier.write(str((sommet % 9) + 1)   + " " + str(int((sommet - sommet % 9) / 9) + 1)  + " " + str(Sudoku.nodes[sommet]["Color"]) + "\n" )
-    fichier.close()
+    if algorithms.sudokuChecker(Sudoku) :
+        fichier = open(sys.argv[4], "a") 
+        for sommet in Sudoku.nodes() :
+            if sommet == 80 :
+                fichier.write(str((sommet % 9) + 1)   + " " + str(int((sommet - sommet % 9) / 9) + 1)  + " " + str(Sudoku.nodes[sommet]["Color"]))
+
+            else :
+                fichier.write(str((sommet % 9) + 1)   + " " + str(int((sommet - sommet % 9) / 9) + 1)  + " " + str(Sudoku.nodes[sommet]["Color"]) + "\n")
+        fichier.close()
+    else :
+        print("\n\nCe sudoku n'est pas réalisable, en tout cas pas avec notre algorithme\n\n")
 
 
     couleur = nx.get_node_attributes(Sudoku, "Color")
