@@ -23,6 +23,8 @@ python3 gsm.py -i input/input_gsm.txt -o output_gsm.txt
 
 ###### Output
 
+En éxécutant les codes, un affichage graphique affichera un graphe de sommets avec un nombre dedans, ce nombre représente sa couleur, pour obtenir le nom du sommet au lieu de sa couleur, dans la fonction draw() dans sudoku.py, map.py ou gsm.py, retirez les parametres "labels" et/ou "with_labels"
+
 Vous trouverez le résultat des résolutions sous forme textuelle dans les fichiers output_gsm.txt, output_map.txt et output_sudoku.txt
 
 ## Modélisation (Partie du 1er rendu)
@@ -162,12 +164,15 @@ fonction glouton_naif(graphe) :
 ```
 
 
+On parcours la liste avec une couleur en tete, si un noeud n'a aucun voisin avec cette couleur, on le colorie de cette couleur
 
+une fois la liste parcourue, nous lui retirons ces sommets colorés et on recommence à boucler sur la liste de la même maniere jusqu'à ce que tous les sommets soient colorés.
 
 
 #### Proposer un second algorithme qui mettra en œuvre une heuristique dont l’objectif sera de tenter d’envisager les sommets dans un ordre plus habile.
 
-Cet algorithme va traiter les sommets du graphe dans l'ordre décroissant de leur degré
+Cet algorithme va traiter les sommets du graphe dans l'ordre décroissant de leur degré,
+le principe est néanmoins le même.
 
 ```
 fonction glouton_avancé(graphe) :
@@ -220,6 +225,8 @@ def backtracking(graphe, sommet) :
     return graphe
 ```
 
+On donne une couleur a un premier sommet et on rappele la fonction sur le graphe désormais un peu plus complet, si en continuant on observe qu'on est bloqué, on décolore ce premier sommet et on reteste sur un autre sommet avec une couleur qui possible.
+
 Ici donner une couleur possible signifie boucler sur les couleurs et donner au sommet une couleur qui ne déroge pas
 aux regles du sudoku.
 
@@ -230,7 +237,7 @@ Dans algorithms.py, nous avons ajouté à notre backtracking une condition qui v
 afin d'éviter qu'il tourne en boucle dans le cas d'un Sudoku sans résolution.
 
 
-Cet algorithme est plus lent car brute-force, néanmoins, en cas de soucis il reviendra en arrière et prendra un autre chemin, d'où son nom.
+Cet algorithme est plus lent car brute-force, néanmoins, en cas de couleur qui ne va pas, il reviendra en arrière et prendra un autre chemin, d'où son nom.
 
 Aussi, si on ne l'arretait pas au premier sudoku résolu, cet algorithme est capable de trouver plusieurs solution, s'il y en a.
 
