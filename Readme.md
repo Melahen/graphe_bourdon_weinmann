@@ -125,13 +125,13 @@ Dans ce Readme, on exposera nos algorithmes en pseudocode
 #### contraintes sur le nombre d’éléments permettant de resoudre le problème.
 On peut proposer un algorithme naïf de ce type :
 
-`
+```
 fonction algorithme_trop_naif(graphe) :
     couleur initialisée à zéro
     pour chaque sommet dans graphe :
         sommet[couleur] = couleur
         couleur++
-`
+```
 
 Cet algorithme est très simple et rapide. Il est aussi inutile, alors nous ne le prendrons pas en considération.
 
