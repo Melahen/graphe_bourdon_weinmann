@@ -140,7 +140,7 @@ def sudokuChecker(graphe) :
 
 
 """
-def solveur_naif(g) :
+def solveur_plutot_humain(g) :
 
     liste_tous_sommets = [sommet for sommet in g.nodes()]
     dico_chaque_sommet = {}
