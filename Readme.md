@@ -137,6 +137,7 @@ Cet algorithme est très simple et rapide. Il est aussi inutile, alors nous ne l
 
 On proposera un autre algorithme naïf plus intéressant, glouton, ou greedy :
 
+```
 fonction glouton_naif(graphe) :
     les_sommets = liste de tous les sommets de graphe (au début)
     liste_sommets_colorés = liste des sommets ayant une couleur 
@@ -151,7 +152,7 @@ fonction glouton_naif(graphe) :
             sommet_actuel reinitialisé à 0
             couleur_actuelle est incrémentée de 1 
             retirer à les_sommets les sommets qu'il a en commun avec liste_sommet_colorés
-
+```
 
 
 
@@ -161,7 +162,7 @@ fonction glouton_naif(graphe) :
 
 Cet algorithme va traiter les sommets du graphe dans l'ordre décroissant de leur degré
 
-
+```
 fonction glouton_avancé(graphe) :
     les_sommets = liste de tous les sommets de graphe (au début)
     liste_sommets_colorés = liste des sommets ayant une couleur 
@@ -176,7 +177,7 @@ fonction glouton_avancé(graphe) :
             sommet_actuel reinitialisé à 0
             couleur_actuelle est incrémentée de 1 
             retirer à les_sommets les sommets qu'il a en commun avec liste_sommet_colorés
-
+```
 
 #### Discuter des limites de cet heuristique
 
@@ -188,6 +189,7 @@ Il terminera rapidement, mais ne trouvera pas toujours le nombre minimum de coul
 Un algorithme de backtracking sera plus efficace pour sudoku, où 9 couleurs sont imposées.
 
 Pseudocode pour backtracking :
+```
 def backtracking(graphe, sommet) :
     si sommet est le dernier du graphe :
         si sommet n'est pas coloré :
@@ -207,6 +209,7 @@ def backtracking(graphe, sommet) :
     sinon :
         backtracking(graphe, sommet + 9)
     return graphe
+```
 
 Ici couleur possible s'assurera que le sudoku n'a pas deux voisins de meme couleur.
 
