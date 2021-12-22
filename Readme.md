@@ -1,5 +1,23 @@
 Kévin Bourdon et Maximilien Weinmann
 
+# Execution du code et visualisation de la coloration des graphes
+
+###### Pour Sudoku, vous pouvez taper dans le terminal :
+python3 sudoku.py -i input/Sudoku_simple.txt -o output_sudoku.txt
+
+ou bien 
+
+python3 sudoku.py -i input/sudoku2.txt -o output_sudoku.txt
+
+
+###### Pour la carte géographique, vous pouvez taper dans le terminal :
+python3 map.py -i input/input_map.txt -o output_map.txt
+
+
+###### Pour le réseaux GSM, vous pouvez taper dans le terminal :
+python3 gsm.py -i input/input_gsm.txt -o output_gsm.txt
+
+
 ## Modélisation (Partie du 1er rendu)
 
 De manière générale, nous utiliserons un algorithme de coloration.
@@ -70,7 +88,7 @@ Comment le faire le plus rapidement possible ?
 Les problèmes difficiles sont des problèmes ne pouvant pas être résolus en temps polynomial, mais en plus de temps encore.
 Par opposition, les problemes "faciles" peuvent être résolus en temps polynomial.
 
-Je tiens mes propos de ces sites :
+Nous tenons nos propos de ces sites :
 
 https://waytolearnx.com/2019/03/difference-entre-un-probleme-np-complet-et-np-difficile.html
 
@@ -92,7 +110,7 @@ Moins formelement :
 Une heuristique est une maniere de trouver une solution, même si la résolution n'est pas optimale.
 
 
-Mes sources :
+Nos sources :
 https://www.techno-science.net/glossaire-definition/Heuristique.html
 http://ressources.unit.eu/cours/EnsROtice/module_avance_thg_voo6/co/heurreslim.html
 
@@ -107,13 +125,13 @@ Dans ce Readme, on exposera nos algorithmes en pseudocode
 #### contraintes sur le nombre d’éléments permettant de resoudre le problème.
 On peut proposer un algorithme naïf de ce type :
 
-
+`
 fonction algorithme_trop_naif(graphe) :
     couleur initialisée à zéro
     pour chaque sommet dans graphe :
         sommet[couleur] = couleur
         couleur++
-
+`
 
 Cet algorithme est très simple et rapide. Il est aussi inutile, alors nous ne le prendrons pas en considération.
 
@@ -248,8 +266,11 @@ On a lancé plusieurs fois nos algorithmes pour prendre un résultat moyen.
 - Sudoku : 0.006193 s (en 11 couleurs par contre)
 
 
-Pour ce qui est de remplir chaque graphe, notre proposition de glouton avancé est la meilleur, dans chaque cas, quand il s'agit de temps de résolution
+Pour ce qui est de remplir chaque graphe, notre proposition de glouton avancé est la meilleur, dans chaque cas, quand il s'agit de temps de résolution.
 
-Pour une résolution correcte, nos gloutons ne sont bons que pour Gsm et Carte, pour ce qui est de Sudoku, on se sert d'un backtracking, qui est très lent
+Pour une résolution correcte, nos gloutons ne sont bons que pour Gsm et Carte, pour ce qui est de Sudoku, on se sert d'un backtracking, qui est très lent.
 
 Nous tenons à préciser que les inputs sont restés les mêmes, d'un algorithme à l'autre.
+
+L'input de map et de gsm est disponible sur Discord.
+Nous avons pris des sudokus à résoudre pour l'input de sudoku.
